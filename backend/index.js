@@ -23,11 +23,24 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
+// const corsOptions = {
+//     {} origin:{'http://localhost:5173',
+//      'https://jobsy-delta.vercel.app/'}
+//     credentials:true}
+// }
+
 const corsOptions = {
-    // origin:'http://localhost:5173',
-     origin:'https://jobsy-delta.vercel.app/',
-    credentials:true
-}
+    origin: function (origin, callback) {
+      const allowedOrigins = ['http://localhost:5173', 'https://jobsy-delta.vercel.app'];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  };
+  
 app.use(cors(corsOptions));
 
 
