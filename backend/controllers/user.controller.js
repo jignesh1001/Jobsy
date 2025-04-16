@@ -85,7 +85,7 @@ export const login = async (req, res) => {
       role: user.role,
       profile: user.profile
     };
-    console.log('user logged in successfully')
+    console.log('user logged in successfully'+ user)
     return res
       .status(200)
       .cookie("token", token, {
@@ -94,7 +94,8 @@ export const login = async (req, res) => {
         sameSite: "strict"
       })
       .json({
-        message: `Welcome back ${user.fullname}`,
+        // message: `Welcome back ${user.fullname}`,
+        message: `Welcome back ${user.fullname} ${token}`,
         user,
         success: true
       });
