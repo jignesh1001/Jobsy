@@ -1,5 +1,6 @@
 import { Badge } from "./ui/badge"
 
+
 const LatestJobCards = () => {
   return (
     <div className='p-5 rounded-md shadow-xl bg-white border border-gray-100 cursor-pointer'>
@@ -17,6 +18,7 @@ const LatestJobCards = () => {
             <Badge className={'text-[#7209b7] font-bold'} variant="ghost">24 LPA</Badge>
         </div>
     </div>
+    
   )
 }
 

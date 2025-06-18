@@ -42,7 +42,9 @@
 
 // export default FilterCard;
 
+//note
 
+// filter page is improved with separate radiogroups 
 
 
 import { RadioGroupItem } from "./ui/radio-group";

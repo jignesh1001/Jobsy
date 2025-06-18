@@ -2,6 +2,7 @@ import { Bookmark } from "lucide-react";
 import { Button } from "./ui/button";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import {Badge} from './ui/badge';
+import test from "../assets/test.jpg";
 const Job = () => {
   return (
     <div className="p-5 rounded-md shadow-xl bg-white border border-gray-100">
@@ -14,8 +15,8 @@ const Job = () => {
 
       <div className="flex items-center gap-2 my-2">
         <Button className="p-6" variant="outline" size="icon">
-          <Avatar>
-            <AvatarImage src="https://www.shutterstock.com/image-vector/air-conditioning-company-logo-ac-600nw-2509412195.jpg" />
+          <Avatar className="h-10 w-10">
+            <AvatarImage src={test} />
           </Avatar>
         </Button>
         <div>
