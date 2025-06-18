@@ -7,17 +7,20 @@ import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { LogOut, User2 } from "lucide-react";
+import { useSelector } from "react-redux";
 const Navbar =()=> {
-  const user = false;
+  const {user} = useSelector(store =>store.auth)
 
   return (
-    <div className="bg-white">
+    <div className="bg-white ">
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
         <div>
           <Link to="/">
           <h1 className="text-2xl font-bold">
-            Job <span className="text-[#F83002]">Portal</span>
+            Job<span className="text-[#F83002]">sy</span>
+    
           </h1>
+            <h5 className="font-style: italic text-xs">making job hunt easier</h5>
           </Link>
           
         </div>
@@ -40,7 +43,7 @@ const Navbar =()=> {
           ) : (
             <Popover>
               <PopoverTrigger asChild>
-                <Avatar className="cursor-pointer w-16 h-16 ">
+                <Avatar className="cursor-pointer w-12 h-12 ">
                   <AvatarImage
                     src="https://github.com/shadcn.png"
                     alt="@shadcn"
@@ -52,7 +55,7 @@ const Navbar =()=> {
               <PopoverContent className="w-80 rounded">
                 <div className="">
                   <div className="flex gap-4 space-y-2 pt-4 pb-4 pl-4 shadow-md">
-                    <Avatar className="cursor-pointer w-16 h-16  ">
+                    <Avatar className="cursor-pointer w-12 h-12  ">
                       <AvatarImage
                         src="https://github.com/shadcn.png"
                         alt="@shadcn"
@@ -60,9 +63,9 @@ const Navbar =()=> {
                       />
                     </Avatar>
                     <div>
-                      <h4 className="font-medium">Test user</h4>
+                      <h4 className="font-medium">{user.fullname}</h4>
                       <p className="text-sm text-muted-foreground">
-                        Lorem ipsum dolor sit amet.
+                        {user.email}
                       </p>
                     </div>
                   </div>
@@ -70,7 +73,7 @@ const Navbar =()=> {
                   <div className="flex flex-col my-2 gap-3 text-gray-600">
                     <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <User2></User2>
-                      <Button variant="link">View Profile</Button>
+                      <Button variant="link"><Link to={'/profile'}>View Profile</Link></Button>
                     </div>
                     <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <LogOut></LogOut>
