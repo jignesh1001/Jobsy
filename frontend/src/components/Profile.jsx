@@ -22,7 +22,7 @@ function Profile() {
   return (
     <div>
       <Navbar />
-      <div className="max-w-7xl mx-auto bg-white border border-gray-200 rounded-2xl my-5 p-8">
+      <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl my-5 p-8">
         <div className="flex justify-between">
           <div className="flex items-center gap-5">
             <Avatar className="h-24 w-24">
@@ -79,10 +79,14 @@ function Profile() {
           )}
         </div>
       </div>
+      {/* resume section */}
+
+
       <div className="max-w-4xl mx-auto bg-white rounded-2xl">
-        <h1>Applied Jobs</h1>
+        <h1 className="font-bold text-lg my-5">Applied Jobs</h1>
         <AppliedJobTable />
       </div>
+
     </div>
   );
 }
