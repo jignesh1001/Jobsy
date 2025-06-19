@@ -98,7 +98,7 @@ export const login = async (req, res) => {
       })
       .json({
         // message: `Welcome back ${user.fullname}`,
-        message: `Welcome back ${user.fullname} ${token}`,
+        message: `Welcome back ${user.fullname}`,
         user,
         success: true
       });
