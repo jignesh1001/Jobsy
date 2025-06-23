@@ -1,6 +1,5 @@
 import Navbar from "./shared/Navbar";
 import { Avatar, AvatarImage } from "./ui/avatar";
-import testImage from "../assets/test.jpg";
 import { Button } from "./ui/button";
 import { Pen } from "lucide-react";
 import { Mail, Contact } from "lucide-react";
@@ -9,6 +8,7 @@ import AppliedJobTable from "./AppliedJobTable";
 import { useState } from "react";
 import UpdateProfileDialog from "./UpdateProfileDialog";
 import { useSelector } from "react-redux";
+import defaultImage from "../assets/default.jpg"
 
 // const skills = [
 //   "HTML",
@@ -24,16 +24,16 @@ const isResume = true;
 function Profile() {
   const [open,setOpen] = useState(false)
   const {user} = useSelector((store) => store.auth);
+  // console.log(testimage)
   return (
     <div>
       <Navbar />
       <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl my-5 p-8">
         <div className="flex justify-between">
-          <div className="flex items-center gap-5">
-            <Avatar className="h-24 w-24">
-              <AvatarImage src={testImage} alt="profile" />
+          <div className="flex items-center gap-5 ">
+            <Avatar className="h-24 w-24 border border-gray-500">
+              <AvatarImage src={user?.profile?.profilePhoto || defaultImage} alt="profile" />
             </Avatar>
-
             <div>
               <h1 className="font-medium text-xl">{user?.fullname}</h1>
               <p>
@@ -75,7 +75,7 @@ function Profile() {
           {isResume ? (
             <a
               target="blank"
-              href="https://google.com"
+              href={user?.profile?.resume}
               className="text-blue-500 w-full hover:underline cursor-pointer"
             >
               {user?.profile?.resumeOriginalName}

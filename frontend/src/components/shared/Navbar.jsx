@@ -7,9 +7,32 @@ import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { LogOut, User2 } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
+import { setUser } from "@/redux/authSlice";
+import axios from "axios";
+import { USER_API_END_POINT } from "@/utils/constant";
+import { useNavigate } from "react-router-dom";
+import defaultImage from "../../assets/default.jpg"
 const Navbar =()=> {
   const {user} = useSelector(store =>store.auth)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logouthandler = async () =>{
+    try {
+        const res = await axios.get(`${USER_API_END_POINT}/logout`,{withCredentials:true})
+        if(res.data.success){
+          console.log(res.data)
+           dispatch(setUser(null))
+           navigate("/")
+           toast.success(res.data.message)
+        }
+    } catch (error) {
+        console.log(error)
+        toast.error(error.response.data.message)
+    }
+  }
 
   return (
     <div className="bg-white ">
@@ -45,9 +68,9 @@ const Navbar =()=> {
               <PopoverTrigger asChild>
                 <Avatar className="cursor-pointer w-12 h-12 ">
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
+                    src={user?.profile?.profilePhoto || defaultImage}
                     alt="@shadcn"
-                    className="rounded-full"
+                    className="w-12 h-12 rounded-full object-cover"
                   />
                 </Avatar>
               </PopoverTrigger>
@@ -55,11 +78,11 @@ const Navbar =()=> {
               <PopoverContent className="w-80 rounded">
                 <div className="">
                   <div className="flex gap-4 space-y-2 pt-4 pb-4 pl-4 shadow-md">
-                    <Avatar className="cursor-pointer w-12 h-12  ">
+                    <Avatar className="cursor-pointer w-12 h-12">
                       <AvatarImage
-                        src="https://github.com/shadcn.png"
+                        src={user?.profile?.profilePhoto || defaultImage}
                         alt="@shadcn"
-                        className="rounded-full"
+                        className="w-12 h-12 rounded-full object-cover"
                       />
                     </Avatar>
                     <div>
@@ -77,7 +100,7 @@ const Navbar =()=> {
                     </div>
                     <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <LogOut></LogOut>
-                      <Button variant="link">Logout</Button>
+                      <Button onClick={logouthandler} variant="link">Logout</Button>
                     </div>
                   </div>
                 </div>

@@ -14,7 +14,13 @@ export const register = async (req, res) => {
         success: false,
       });
     }
-    let user = await User.findOne({ email });
+
+    const file = req.file
+    const fileUri = getDataUri(file)
+
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content)
+
+    const user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({
         message: "User already exist with this email",
@@ -29,6 +35,10 @@ export const register = async (req, res) => {
       phoneNumber,
       password: hashedPassword,
       role,
+      profile:{
+        profilePhoto:cloudResponse.secure_url,
+        
+      }
     });
     logMessage(fullname + "'s Account created Successfully")
     return res.status(201).json({
