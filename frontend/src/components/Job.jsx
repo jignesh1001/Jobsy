@@ -5,7 +5,7 @@ import {Badge} from './ui/badge';
 import test from "../assets/default.jpg";
 import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
-const Job = ({job}) => {
+const Job = (job) => {
   const navigate = useNavigate()  
   // const jobId = "amdnbsflnafl"
   if (!job) 
