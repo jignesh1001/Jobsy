@@ -14,7 +14,7 @@ const useGetAllJobs = () => {
               dispatch(setAllJobs(res.data.jobs))
            }
            if(res.data.success){
-            //  console.log(res.data)
+             console.log(res.data)
            }
         }catch(error){
            console.log(error)
@@ -25,4 +25,4 @@ const useGetAllJobs = () => {
   },[])
 }
 
-export default useGetAllJobs
+export default useGetAllJobs;

@@ -1,6 +1,7 @@
 import { Application } from "../models/application.model.js";
 import { Job } from "../models/job.model.js";
 import {User} from "../models/user.model.js"
+import { Company } from "../models/company.model.js";
 
 export const applyJob = async (req, res) => {
   try {
@@ -27,6 +28,8 @@ export const applyJob = async (req, res) => {
     //check if the job exists
 
     const job = await Job.findById(jobId);
+    const companyId = job.company
+    const companyName = await Company.findById(companyId)
     if (!job) {
       return res.status(404).json({
         message: "Job not found",
@@ -44,7 +47,7 @@ export const applyJob = async (req, res) => {
     await job.save()
 
     return res.status(201).json({
-      message:"Job Applied Successfully.",
+      message:`You have successfully applied for ${job.title} at ${companyName.name}`,
       success : true
     })
   } catch (error) {

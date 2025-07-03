@@ -31,7 +31,7 @@ app.use(cookieParser());
 
 const corsOptions = {
     origin: function (origin, callback) {
-      const allowedOrigins = ['http://localhost:5173', 'https://jobsy-delta.vercel.app'];
+      const allowedOrigins = ['http://localhost:5174', 'https://jobsy-delta.vercel.app','http://localhost:5173',];
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -61,7 +61,7 @@ app.listen(PORT,()=>{
     connectDB();
     console.log('testing.........')
     console.log(`Server running at port ${PORT}`)
-    logMessage("server started")
+    
 })
 
 const __filename = fileURLToPath(import.meta.url)

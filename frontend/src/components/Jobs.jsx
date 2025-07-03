@@ -8,12 +8,12 @@ import { useSelector } from "react-redux";
 // const jobsArray = [];
 
 const Jobs = () => {
-  const {allJobs} = useSelector((store) => store.job);
-  console.log(allJobs)
+  const {allJobs} = useSelector(store => store.job);
+  console.log(allJobs);
   return (
     <div> 
       <Navbar />
-      <div className="max-w-7xl mx-auto mt-5">
+      <div className="max-w-7xl mx-auto mt-5">  
         <div className="flex gap-5">
           <div className="w-20%">
             <FilterCard />
