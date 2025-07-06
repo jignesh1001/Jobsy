@@ -17,34 +17,6 @@ function AppliedJobTable() {
   const { user } = useSelector((store) => store.auth);
   const { applications } = useSelector((store) => store.applications);
   // console.log(applications)
-
-  const sampleData = [
-    {
-      date: "17-07-2025",
-      position: "Frontend Dev",
-      company: "XYZ Pvt Ltd",
-      status: "Selected",
-    },
-    {
-      date: "20-08-2025",
-      position: "Backend Dev",
-      company: "ABC Technologies",
-      status: "Interview",
-    },
-    {
-      date: "05-09-2025",
-      position: "Fullstack Dev",
-      company: "123 Solutions",
-      status: "Rejected",
-    },
-    {
-      date: "12-10-2025",
-      position: "UI/UX Designer",
-      company: "Creative Studio",
-      status: "Selected",
-    },
-  ];
-
   if (!user) {
     return (
       <h1 className="text-center py-4">

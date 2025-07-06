@@ -148,6 +148,7 @@ const Signup = () => {
                 <Input
                   accept="image/*"
                   type="file"
+          
                   onChange={changeFileHandler}
                   className="cursor-pointer"
                 />

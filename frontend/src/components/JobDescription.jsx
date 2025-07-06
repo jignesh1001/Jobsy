@@ -74,7 +74,7 @@ function Jobdescription() {
         </div>
         <Button
           onClick={isApplied ? null : applyJobHandler}
-          disabled={isApplied}
+          disabled={isApplied }
           className={`rounded-lg ${
             isApplied
               ? "bg-gray-600 cursor-not-allowed"
