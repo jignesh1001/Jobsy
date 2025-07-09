@@ -16,10 +16,10 @@ import { PopoverTrigger } from "@radix-ui/react-popover";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 const CompaniesTable = () => {
-  
+  const navigate = useNavigate();
   
   const {allCompanies,searchCompanyByText} = useSelector(store => store.company);
     
@@ -63,12 +63,12 @@ const CompaniesTable = () => {
                   </Avatar>
                 </TableCell>
                 <TableCell>
-                  {new Date(item.createdAt).toDateString()}{" "}
+                  {item.createdAt.split("T")[0]}
                 </TableCell>
                 <TableCell>{item.name}</TableCell>
                 <TableCell>{user?.fullname}</TableCell>
                 <TableCell>
-                  {new Date(item.updatedAt).toDateString()}{" "}
+                  {item.updatedAt.split("T")[0]}
                 </TableCell>
                 <TableCell className="text-right cursor-pointer">
                   <Popover>
@@ -77,6 +77,7 @@ const CompaniesTable = () => {
                     </PopoverTrigger>
                     <PopoverContent className="w-22 h-10 flex items-center" >
                       <div className="flex items-center gap-2 w-fit cursor-pointer" 
+                       onClick={() => navigate(`/admin/companies/${item._id}`)}
                       >
                         <Edit2 className="w-4"  />
                         <span>Edit {item.name}</span>
