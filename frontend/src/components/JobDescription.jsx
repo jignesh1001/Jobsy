@@ -54,7 +54,7 @@ function Jobdescription() {
     fetchSingleJob();
 
   },[jobId,dispatch,user?._id])
-  console.log(isApplied)
+  
   return (
     <div className="max-w-7xl mx-auto my-10">
       <div className="flex items-center justify-between">

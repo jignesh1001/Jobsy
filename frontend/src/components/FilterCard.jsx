@@ -4,7 +4,8 @@ import { Label } from "./ui/label";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSearchedQuery } from "@/redux/jobSlice";
-import { Button } from "./ui/button";
+
+
 
 
 const filterData = [
@@ -35,7 +36,7 @@ const FilterCard = () => {
   return (
     <div className="w-full bg-white p-3 rounded-mdl">
       <h1 className="font-bold text-lg">Filter Jobs</h1>
-      <Button className="mt-3 h-8" onClick={() => setSelectedValue("")}>Clear Filter</Button>
+      
       <hr className="mt-3" />
 
       {filterData.map((data, index) => (

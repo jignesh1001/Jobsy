@@ -4,31 +4,34 @@ import Job from "./Job";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { setSearchedQuery } from "@/redux/jobSlice";
+
 
 // const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8];
 // const jobsArray = [];
 
 const Jobs = () => {
   const { allJobs, searchedQuery } = useSelector((store) => store.job);
-  const [filteredJobs, setFilteredJobs] = useState(allJobs);
+  const [filteredJobs, setFilteredJobs] = useState(allJobs); // local state
 
   useEffect(() => {
     if (searchedQuery) {
       
-      const filteredJobs = allJobs.filter((job) => {
+      const filtereddJobs = allJobs.filter((job) => {
         return (
           job.title.toLowerCase().includes(searchedQuery.toLowerCase()) ||
           job.description.toLowerCase().includes(searchedQuery.toLowerCase()) ||
           job.location.toLowerCase().includes(searchedQuery.toLowerCase())
         );
       });
-      setFilteredJobs(filteredJobs);
+      setFilteredJobs(filtereddJobs);
+      
     } else {
       setFilteredJobs(allJobs);
     }
   }, [allJobs, searchedQuery]);
 
-  console.log(allJobs);
+  
   return (
     <div>
       <Navbar />
@@ -45,7 +48,7 @@ const Jobs = () => {
               <div className="grid grid-cols-3 gap-4">
                 {filteredJobs.map((job) => (
                   <motion.div
-                    inital={{ opacity: 0, x: 100 }}
+                    initial={{ opacity: 0, x: 100 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -100 }}
                     transition={{ duration: 0.5 }}

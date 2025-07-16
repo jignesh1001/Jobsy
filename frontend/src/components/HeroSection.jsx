@@ -21,10 +21,15 @@ const HeroSection = () => {
           No. 1 Job Hunt Website
         </span>
         <motion.h1
-          inital={{ opacity: 0, x: 100 }}
+          initial={{ opacity: 0, x: 200 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -100 }}
-          transition={{ duration: 0.5 }}
+          transition={{
+            type: "spring",
+            stiffness: 50,
+            damping: 12,
+            duration: 0.9,
+          }}
           className="text-5xl font-bold"
         >
           Search,Apply & <br></br> Get Your{" "}
@@ -34,7 +39,18 @@ const HeroSection = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
           Exercitationem quia pariatur itaque accusantium corporis!
         </p>
-        <div className="flex w-[40%] shadow-lg border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto">
+        <motion.div
+          className="flex w-[40%] shadow-lg border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto"
+          initial={{ opacity: 0, x: -200 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 100 }}
+          transition={{
+            type: "spring",
+            stiffness: 50,
+            damping: 12,
+            duration: 0.9,
+          }}
+        >
           <input
             type="text"
             placeholder="Find Your Dream Job"
@@ -47,7 +63,7 @@ const HeroSection = () => {
           >
             <Search className="h-5 w-5" />
           </Button>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
