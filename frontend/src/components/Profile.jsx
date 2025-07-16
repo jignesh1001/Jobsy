@@ -9,6 +9,7 @@ import { useState } from "react";
 import UpdateProfileDialog from "./UpdateProfileDialog";
 import { useSelector } from "react-redux";
 import defaultImage from "../assets/default.jpg"
+import { useGetApplications } from "@/hooks/useGetApplications";
 
 // const skills = [
 //   "HTML",
@@ -22,6 +23,7 @@ import defaultImage from "../assets/default.jpg"
 // const skills = [];
 const isResume = true;
 function Profile() {
+  useGetApplications();
   const [open,setOpen] = useState(false)
   const {user} = useSelector((store) => store.auth);
   const { applications } = useSelector((store) => store.applications);

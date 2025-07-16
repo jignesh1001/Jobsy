@@ -20,8 +20,8 @@ import { useNavigate } from "react-router-dom";
 
 const CompaniesTable = () => {
   const navigate = useNavigate();
-  
   const {allCompanies,searchCompanyByText} = useSelector(store => store.company);
+  
     
     const {user}= useSelector((state) => state.auth);
     const [filterCompany, setFilterCompany] = useState(allCompanies);

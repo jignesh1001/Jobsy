@@ -137,6 +137,7 @@ export const updateStatus = async (req,res) =>{
 
     // update status
     application.status = status.toLowerCase()
+    application.updatedAt = Date.now()
     await application.save()
 
     return res.status(200).json({

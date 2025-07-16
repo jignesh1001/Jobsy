@@ -107,15 +107,15 @@ const Navbar = () => {
                         className="w-12 h-12 rounded-full object-cover"
                       />
                     </Avatar>
-                    <div>
-                      <h4 className="font-medium">{user.fullname}</h4>
+                    <div >
+                      <h4 className="font-medium">{user.fullname + user.phoneNumber}</h4>
                       <p className="text-sm text-muted-foreground">
                         {user.email}
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex flex-col my-2 gap-3 text-gray-600">
+                  <div className="flex flex-col my-2 gap-3 text-gray-600 ">
                     <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <User2></User2>
                       <Button variant="link">

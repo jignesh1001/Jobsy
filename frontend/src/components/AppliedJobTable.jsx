@@ -8,11 +8,11 @@ import {
   TableCaption,
 } from "./ui/table";
 import { Badge } from "./ui/badge";
-import { useGetApplications } from "../hooks/useGetApplications";
+
 import { useSelector } from "react-redux";
 
 function AppliedJobTable() {
-  useGetApplications();
+  
 
   const { user } = useSelector((store) => store.auth);
   const { applications } = useSelector((store) => store.applications);
@@ -41,11 +41,11 @@ function AppliedJobTable() {
         <TableBody>
           {applications.map((item, index) => (
             <TableRow key={index}>
-              <TableCell>{item.createdAt}</TableCell>
+              <TableCell>{item.createdAt?.split("T")[0]}</TableCell>
               <TableCell>{item.job?.title}</TableCell>
               <TableCell>{item.job?.company?.name}</TableCell>
               <TableCell className="text-right">
-                <Badge>{item.status}</Badge>
+                <Badge className={`${item.status === "rejected" ? "bg-red-400" : item.status === "pending" ? "bg-gray-400" : "bg-green-400"}`}>{item.status.toUpperCase()}</Badge>
               </TableCell>
             </TableRow>
           ))}

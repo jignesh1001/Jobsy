@@ -33,7 +33,7 @@ const Job = ({job}) => {
           </Avatar>
         </Button>
         <div>
-          <h1 className='font-medium text-lg'>{job?.company?.name}</h1>
+          <h1 className='font-medium text-lg'>{job?.company?.name} <sup className="text-[#6A38C2] text-xs">verified</sup></h1>
           <p className='text-sm text-gray-500'>India</p>
         </div> 
       </div>
