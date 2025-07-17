@@ -7,7 +7,6 @@ const applicationsSlice = createSlice({
     initialState: {
         applications:[],
         applicants:[]
-
     },
     reducers:{
         //actions

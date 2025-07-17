@@ -9,8 +9,7 @@ const jobSlice = createSlice({
         singleJob:null,
         searchJobByText:"",
         searchedQuery:"",
-        searchApplicantsByText:""
-
+        searchApplicantsByText:"",
     },
     reducers:{
         setAllJobs:(state,action) =>{
