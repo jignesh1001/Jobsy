@@ -107,8 +107,10 @@ const Navbar = () => {
                         className="w-12 h-12 rounded-full object-cover"
                       />
                     </Avatar>
-                    <div >
-                      <h4 className="font-medium">{user.fullname + user.phoneNumber}</h4>
+                    <div>
+                      <h4 className="font-medium">
+                        {user.fullname }
+                      </h4>
                       <p className="text-sm text-muted-foreground">
                         {user.email}
                       </p>
@@ -116,18 +118,34 @@ const Navbar = () => {
                   </div>
 
                   <div className="flex flex-col my-2 gap-3 text-gray-600 ">
-                    <div className="flex w-fit items-center gap-2 cursor-pointer">
+                    {/* <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <User2></User2>
                       <Button variant="link">
                         <Link to={"/profile"}>View Profile</Link>
                       </Button>
-                    </div>
-                    <div className="flex w-fit items-center gap-2 cursor-pointer">
+                    </div> */}
+                    <Link
+                      to="/profile"
+                      className="flex w-fit items-center gap-2 cursor-pointer text-sm text-blue-600 hover:underline"
+                    >
+                      <User2 className="w-4" />
+                      View Profile
+                    </Link>
+
+                    {/* <div className="flex w-fit items-center gap-2 cursor-pointer">
                       <LogOut></LogOut>
                       <Button onClick={logouthandler} variant="link">
                         Logout
                       </Button>
-                    </div>
+                    </div> */}
+
+                    <button
+                      onClick={logouthandler}
+                      className="flex w-fit items-center gap-2 cursor-pointer text-sm text-red-600 hover:underline"
+                    >
+                      <LogOut className="w-4" />
+                      Logout
+                    </button>
                   </div>
                 </div>
               </PopoverContent>
