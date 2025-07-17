@@ -1,25 +1,25 @@
 import Navbar from "../shared/Navbar";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { useSelector } from "react-redux";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+
 import axios from "axios";
 import { JOB_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Loader2 } from "lucide-react";
+import useGetJobById from "@/hooks/useGetJobById";
 
 
-const PostJob = () => {
+const EditJob = () => {
+
+   const params = useParams();
+   useGetJobById(params.id)
+
+   const { singleJob } = useSelector((store) => store.job);
+
   const [input, setInput] = useState({
     title: "",
     description: "",
@@ -29,9 +29,7 @@ const PostJob = () => {
     jobType: "",
     experience: "",
     position: 0,
-    company: "",
   });
-
 
   const [loading, setLoading] = useState(false);
 
@@ -43,19 +41,14 @@ const PostJob = () => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const selectChangeHandler = (value) => {
-    const selectedCompany = allCompanies.find(
-      (company) => company.name.toLowerCase() === value
-    );
-    setInput({ ...input, companyId: selectedCompany?._id });
-  };
+  
 
   const submitHandler = async (e) => {
     console.log(input);
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
+      const res = await axios.put(`${JOB_API_END_POINT}/update/${params.id}`, input, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -72,6 +65,18 @@ const PostJob = () => {
     }
   };
 
+  useEffect(() => {
+    setInput({
+      title: singleJob?.title || "",
+      description: singleJob?.description || "",
+      requirements: singleJob?.requirements || "",
+      salary: singleJob?.salary || 0,
+      location:singleJob?.location || "",
+      jobType: singleJob?.jobType || "",
+      experience: singleJob?.experienceLevel || "",
+      position: singleJob?.position || 0,
+    });
+  }, [singleJob]);
 
   return (
     <div>
@@ -81,14 +86,6 @@ const PostJob = () => {
           onSubmit={submitHandler}
           className="p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md"
         >
-            <Button
-              variant="outline"
-              className="flex items-center gap-2 text-gray-500 font-semibold mb-5"
-              onClick={() => navigate("/admin/jobs")}
-            >
-              <ArrowLeft />
-              <span>Back</span>
-            </Button>
           <div className="grid grid-cols-2 gap-2 ">
             <div>
               <Label>Title</Label>
@@ -178,7 +175,7 @@ const PostJob = () => {
                 onChange={changeEventHandler}
               />
             </div>
-            {allCompanies.length > 0 && (
+            {/* {allCompanies.length > 0 && (
               <Select onValueChange={selectChangeHandler}>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select a company" />
@@ -198,7 +195,7 @@ const PostJob = () => {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-            )}
+            )} */}
           </div>
 
           {loading ? (
@@ -208,7 +205,7 @@ const PostJob = () => {
             </Button>
           ) : (
             <Button type="submit" className="w-full my-4">
-              Post New Job
+              Upadate Job
             </Button>
           )}
           {allCompanies.length === 0 && (
@@ -222,4 +219,4 @@ const PostJob = () => {
   );
 };
 
-export default PostJob;
+export default EditJob;

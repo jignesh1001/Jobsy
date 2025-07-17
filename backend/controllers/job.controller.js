@@ -3,6 +3,7 @@ import {Job} from "../models/job.model.js"
 export const postJob = async (req,res) =>{
     try{
        const {title,description,requirements,salary,location,jobType,experience,position,companyId} = req.body;
+       console.log(req.body)
        const userId = req.id;
        if(!title || !description || !salary || !location || !jobType || !experience || !position || !companyId ){
           return res.status.json({
@@ -22,6 +23,7 @@ export const postJob = async (req,res) =>{
            company:companyId,
            created_by:userId
        })
+       console.log(job)
        return res.status(201).json({
           message:"New job created successfully",
           job,
@@ -82,6 +84,32 @@ export const getJobById = async (req,res)=>{
      }catch(error){
         console.log(error)
      }
+}
+
+export const updateJob = async(req,res)=>{
+   try {
+      const {title,description,requirements,salary,
+         location,jobType,experienceLevel,position} = req.body;
+      const updateData = {title,description,requirements,salary,
+         location,jobType,experienceLevel,position}
+
+      const job = await Job.findByIdAndUpdate(req.params.id,updateData,{new:true})
+
+      if(!job){
+         return res.status(404).json({
+            message:"Job not found",
+            success:false
+         })
+      }
+      return res.status(200).json({
+         message:"Job updated successfully",
+         job,
+         success:true
+      }) 
+      }
+    catch (error) {
+      console.log(error)
+   }
 }
 // admin total job created 
 export const getAdminJobs = async(req,res)=>{
