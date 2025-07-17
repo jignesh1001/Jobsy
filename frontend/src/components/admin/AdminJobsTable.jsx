@@ -43,8 +43,8 @@ const AdminJobsTable = () => {
   return (
     <div>
       <div className="max-w-5xl mx-auto my-10">
-        <h1 className="font-bold text-lg my-5">
-          Companies ({filterJobs.length})
+        <h1 className="font-bold text-lg my-5 mx-5">
+           Jobs({filterJobs.length})
         </h1>
         <Table>
           <TableCaption>Posted Jobs</TableCaption>

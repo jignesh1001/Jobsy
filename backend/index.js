@@ -31,7 +31,7 @@ app.use(cookieParser());
 
 const corsOptions = {
     origin: function (origin, callback) {
-      const allowedOrigins = ['http://localhost:5174', 'https://jobsy-delta.vercel.app','http://localhost:5173',];
+      const allowedOrigins = ['http://localhost:5174', 'https://jobsy-kappa.vercel.app','http://localhost:5173',];
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {

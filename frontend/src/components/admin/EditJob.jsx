@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { useNavigate, useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import useGetJobById from "@/hooks/useGetJobById";
+import { setSingleJob } from "@/redux/jobSlice";
 
 
 const EditJob = () => {
@@ -18,7 +19,7 @@ const EditJob = () => {
    const params = useParams();
    useGetJobById(params.id)
 
-   const { singleJob } = useSelector((store) => store.job);
+   const { singleJob } = useSelector(store => store.job);
 
   const [input, setInput] = useState({
     title: "",
@@ -27,7 +28,7 @@ const EditJob = () => {
     salary: "",
     location: "",
     jobType: "",
-    experience: "",
+    experienceLevel: "",
     position: 0,
   });
 
@@ -35,7 +36,7 @@ const EditJob = () => {
 
   const navigate = useNavigate();
 
-  const { allCompanies } = useSelector((store) => store.company);
+  const { allCompanies } = useSelector(store => store.company);
 
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -55,6 +56,8 @@ const EditJob = () => {
         withCredentials: true,
       });
       if (res.data.success) {
+        console.log(input)
+        setSingleJob(input)
         toast.success(res.data.message);
         navigate("/admin/jobs");
       }
@@ -73,10 +76,10 @@ const EditJob = () => {
       salary: singleJob?.salary || 0,
       location:singleJob?.location || "",
       jobType: singleJob?.jobType || "",
-      experience: singleJob?.experienceLevel || "",
+      experienceLevel: singleJob?.experienceLevel || "",
       position: singleJob?.position || 0,
     });
-  }, [singleJob]);
+  }, [params.id, singleJob]);
 
   return (
     <div>
@@ -159,8 +162,8 @@ const EditJob = () => {
                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                 placeholder="experience"
                 type="text"
-                name="experience"
-                value={input.experience}
+                name="experienceLevel"
+                value={input.experienceLevel}
                 onChange={changeEventHandler}
               />
             </div>
