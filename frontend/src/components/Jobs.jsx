@@ -25,6 +25,7 @@ const Jobs = () => {
         );
       });
       setFilteredJobs(filtereddJobs);
+    
       
     } else {
       setFilteredJobs(allJobs);

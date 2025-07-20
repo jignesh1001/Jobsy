@@ -17,18 +17,18 @@ const filterData = [
     filterType: "Industry",
     array: ["Frontend Developer", "Backend Developer", "Full Stack Developer","Site Engineer", "Golang Engineer", "Data Science"],
   },
-  {
-    filterType: "Salary",
-    array: ["0-40k", "42-11lakh", "1lakh to 5lakh"],
-  },
+  // {
+  //   filterType: "Salary",
+  //   array: ["0-40k", "42-11lakh", "1lakh to 5lakh"],
+  // },
 ];
 
 const FilterCard = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const dispatch = useDispatch();
 
-  const changeHandler = (value) => {
-    setSelectedValue(value);
+   const changeHandler =  (value) => {
+      setSelectedValue(value);
   };
   useEffect(() => {
     dispatch(setSearchedQuery(selectedValue))
