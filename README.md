@@ -1,6 +1,6 @@
 # Jobsy
 
-**Live Preview:** [jobsy-delta.vercel.app](https://jobsy-delta.vercel.app)
+**Live Preview:** [jobsy-kappa.vercel.app](https://jobsy-kappa.vercel.app/)
 
 Jobsy is a modern, full-stack job board application that allows users to browse, post, and manage job listings. Built with a clean architecture and responsive design, it offers a seamless experience for both job seekers and employers.
 
