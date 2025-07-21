@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { setSearchedQuery } from "../redux/jobSlice";
 import { useNavigate } from "react-router-dom";
 
-
 const category = [
   "Frontend Developer",
   "Backend Developer",
@@ -23,16 +22,20 @@ const CategoryCarousel = () => {
     dispatch(setSearchedQuery(query));
     navigate("/browse");
   };
+
   return (
-    <div>
-      <Carousel className="w-full max-w-xl mx-auto my-20">
+    <div className="px-4 sm:px-6 lg:px-8 my-10">
+      <Carousel className="w-full max-w-6xl mx-auto">
         <CarouselContent>
           {category.map((cat, index) => (
-            <CarouselItem className="md:basis-1/2 lg-basis-1/3">
+            <CarouselItem
+              key={index}
+              className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+            >
               <Button
                 onClick={() => searchJobHandler(cat.toLowerCase())}
                 variant="outline"
-                className="rounded-full"
+                className="w-full text-sm sm:text-base rounded-full whitespace-nowrap"
               >
                 {cat}
               </Button>

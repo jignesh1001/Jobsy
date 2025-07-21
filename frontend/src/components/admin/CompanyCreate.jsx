@@ -12,18 +12,16 @@ import { setSingleCompany } from "@/redux/companySlice";
 
 const CompanyCreate = () => {
   const navigate = useNavigate();
-  
-  const [companyName, setcompanyName] = useState();
   const dispatch = useDispatch();
+  const [companyName, setCompanyName] = useState("");
+
   const registerNewCompany = async () => {
     try {
       const res = await axios.post(
         `${COMPANY_API_END_POINT}/register`,
         { companyName },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );
@@ -31,44 +29,53 @@ const CompanyCreate = () => {
       if (res?.data?.success) {
         dispatch(setSingleCompany(res?.data?.company));
         toast.success(res.data.message);
-
         const companyId = res?.data?.company?._id;
         navigate(`/admin/companies/${companyId}`);
       }
     } catch (error) {
-      toast.success(error.response.data.message);
+      toast.error(error.response?.data?.message || "Something went wrong");
       console.log(error);
     }
   };
 
-  
   return (
-    <div>
+    <div className="min-h-screen">
       <Navbar />
-      <div className="max-w-4xl mx-auto">
-        <div className="my-10">
+      <div className="max-w-xl w-full mx-auto px-4 sm:px-6 md:px-8 mt-10">
+        <div className="mb-8">
           <h1 className="font-bold text-2xl">Your Company Name</h1>
-          <p className="text-gray-500">Your Company Description</p>
+          <p className="text-gray-500 text-sm">Enter your company’s name to continue</p>
         </div>
-        <Label>Company Name</Label>
-        <Input
-          type="text"
-          className="my-2"
-          placeholder="company name"
-          onChange={(e) => setcompanyName(e.target.value)}
-        ></Input>
-        <div className="flex items-center gap-2 my-10">
+
+        <div className="space-y-2">
+          <Label htmlFor="companyName">Company Name</Label>
+          <Input
+            id="companyName"
+            type="text"
+            placeholder="Company name"
+            value={companyName}
+            onChange={(e) => setCompanyName(e.target.value)}
+            className="w-full"
+          />
+        </div>
+
+        <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 mt-8">
           <Button
             variant="outline"
+            className="w-full sm:w-fit mb-2 sm:mb-0"
             onClick={() => navigate("/admin/companies")}
           >
             Cancel
           </Button>
-          <Button onClick={registerNewCompany}>Continue</Button>
+          <Button
+            className="w-full sm:w-fit"
+            onClick={registerNewCompany}
+            disabled={!companyName.trim()}
+          >
+            Continue
+          </Button>
         </div>
       </div>
-      
-       
     </div>
   );
 };

@@ -18,18 +18,16 @@ import axios from "axios";
 import { APPLICATION_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
 import { Badge } from "../ui/badge";
-
 import { useEffect, useState } from "react";
 
 const shortListingStatus = ["accepted", "rejected"];
+
 const ApplicantsTable = () => {
-  
   const { applicants } = useSelector((store) => store.applications);
   const { searchApplicantsByText } = useSelector((store) => store.job);
-  const [filteredApplicants, setFilteredApplicants] = useState({ applications: [] });
-
-  console.log(applicants)
-  console.log(searchApplicantsByText)
+  const [filteredApplicants, setFilteredApplicants] = useState({
+    applications: [],
+  });
 
   const statusHandler = async (status, id) => {
     try {
@@ -42,54 +40,50 @@ const ApplicantsTable = () => {
         toast.success(res.data.message);
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || "Something went wrong");
     }
   };
-  
-useEffect(() => {
-  if (!applicants || !applicants.applications) return;
 
-  const filtered = applicants.applications.filter((item) => {
-    const name = item?.applicant?.fullname?.toLowerCase() || "";
-    const title = item?.title?.toLowerCase() || "";
-    const query = searchApplicantsByText.toLowerCase();
+  useEffect(() => {
+    if (!applicants || !applicants.applications) return;
 
-    return (
-      name.includes(query) ||
-      title.includes(query)
-    );
-  });
+    const filtered = applicants.applications.filter((item) => {
+      const name = item?.applicant?.fullname?.toLowerCase() || "";
+      const title = item?.title?.toLowerCase() || "";
+      const query = searchApplicantsByText.toLowerCase();
 
-  setFilteredApplicants({ ...applicants, applications: filtered });
-}, [searchApplicantsByText, applicants]);
+      return name.includes(query) || title.includes(query);
+    });
+
+    setFilteredApplicants({ ...applicants, applications: filtered });
+  }, [searchApplicantsByText, applicants]);
 
   return (
-    <div>
+    <div className="overflow-x-auto">
       <Table>
         <TableCaption>A list of your Applicants</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead>FullName</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Contact</TableHead>
-            <TableHead>Resume</TableHead>
-            <TableHead>Applied Date</TableHead>
-            <TableHead>Status</TableHead>
-
-            <TableHead className="text-right">Action</TableHead>
+            <TableHead className="min-w-[120px]">FullName</TableHead>
+            <TableHead className="min-w-[180px]">Email</TableHead>
+            <TableHead className="min-w-[120px]">Contact</TableHead>
+            <TableHead className="min-w-[140px]">Resume</TableHead>
+            <TableHead className="min-w-[120px]">Applied Date</TableHead>
+            <TableHead className="min-w-[100px]">Status</TableHead>
+            <TableHead className="min-w-[80px] text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredApplicants &&
-            filteredApplicants.applications?.map((item) => (
+          {filteredApplicants?.applications?.length > 0 ? (
+            filteredApplicants.applications.map((item) => (
               <TableRow key={item._id}>
                 <TableCell>{item?.applicant?.fullname}</TableCell>
                 <TableCell>{item?.applicant?.email}</TableCell>
                 <TableCell>{item?.applicant?.phoneNumber}</TableCell>
                 <TableCell>
-                  {item.applicant?.profile?.resume ? (
+                  {item?.applicant?.profile?.resume ? (
                     <a
-                      className="cursor-pointer text-blue-600"
+                      className="text-blue-600 hover:underline"
                       href={item?.applicant?.profile?.resume}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -101,7 +95,7 @@ useEffect(() => {
                   )}
                 </TableCell>
                 <TableCell>
-                  {item?.applicant?.createdAt.split("T")[0]}
+                  {item?.applicant?.createdAt?.split("T")[0]}
                 </TableCell>
                 <TableCell>
                   <Badge
@@ -116,28 +110,35 @@ useEffect(() => {
                     {item.status.toUpperCase()}
                   </Badge>
                 </TableCell>
-                <TableCell className="float-right cursor-pointer">
+                <TableCell className="text-right">
                   <Popover>
-                    <PopoverTrigger>
+                    <PopoverTrigger className="cursor-pointer">
                       <MoreHorizontal />
                     </PopoverTrigger>
-                    <PopoverContent className="w-22">
+                    <PopoverContent className="w-24">
                       {shortListingStatus.map((status, index) => (
                         <div
                           key={index}
-                          className="flex w-fit items-center my-2 cursor-pointer"
+                          className="my-1 cursor-pointer hover:underline"
                           onClick={() =>
                             statusHandler(status.toLowerCase(), item._id)
                           }
                         >
-                          <span>{status}</span>
+                          {status}
                         </div>
                       ))}
                     </PopoverContent>
                   </Popover>
                 </TableCell>
               </TableRow>
-            ))}
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={7} className="text-center py-4">
+                No applicants found.
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </div>

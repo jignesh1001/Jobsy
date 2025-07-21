@@ -18,7 +18,6 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Loader2 } from "lucide-react";
 
-
 const PostJob = () => {
   const [input, setInput] = useState({
     title: "",
@@ -32,11 +31,8 @@ const PostJob = () => {
     company: "",
   });
 
-
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
-
   const { allCompanies } = useSelector((store) => store.company);
 
   const changeEventHandler = (e) => {
@@ -51,7 +47,6 @@ const PostJob = () => {
   };
 
   const submitHandler = async (e) => {
-    console.log(input);
     e.preventDefault();
     try {
       setLoading(true);
@@ -66,34 +61,34 @@ const PostJob = () => {
         navigate("/admin/jobs");
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
-
   return (
     <div>
       <Navbar />
-      <div className=" flex items-center justify-center w-screen my-5">
+      <div className="flex items-center justify-center w-full my-5 px-4">
         <form
           onSubmit={submitHandler}
-          className="p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md"
+          className="w-full max-w-4xl border border-gray-200 shadow-lg rounded-md p-6 md:p-8"
         >
-            <Button
-              variant="outline"
-              className="flex items-center gap-2 text-gray-500 font-semibold mb-5"
-              onClick={() => navigate("/admin/jobs")}
-            >
-              <ArrowLeft />
-              <span>Back</span>
-            </Button>
-          <div className="grid grid-cols-2 gap-2 ">
+          <Button
+            variant="outline"
+            className="flex items-center gap-2 text-gray-500 font-semibold mb-5"
+            onClick={() => navigate("/admin/jobs")}
+            type="button"
+          >
+            <ArrowLeft />
+            <span>Back</span>
+          </Button>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label>Title</Label>
               <Input
-                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                 placeholder="Title"
                 type="text"
                 name="title"
@@ -104,8 +99,7 @@ const PostJob = () => {
             <div>
               <Label>Description</Label>
               <Input
-                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                placeholder="description"
+                placeholder="Description"
                 type="text"
                 name="description"
                 value={input.description}
@@ -115,8 +109,7 @@ const PostJob = () => {
             <div>
               <Label>Requirements</Label>
               <Input
-                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                placeholder="requirements"
+                placeholder="Requirements"
                 type="text"
                 name="requirements"
                 value={input.requirements}
@@ -126,8 +119,7 @@ const PostJob = () => {
             <div>
               <Label>Salary</Label>
               <Input
-                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                placeholder="salary"
+                placeholder="Salary"
                 type="text"
                 name="salary"
                 value={input.salary}
@@ -137,8 +129,7 @@ const PostJob = () => {
             <div>
               <Label>Location</Label>
               <Input
-                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                placeholder="location"
+                placeholder="Location"
                 type="text"
                 name="location"
                 value={input.location}
@@ -146,10 +137,9 @@ const PostJob = () => {
               />
             </div>
             <div>
-              <Label>JobType</Label>
+              <Label>Job Type</Label>
               <Input
-                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                placeholder="jobtype"
+                placeholder="Full-time / Part-time"
                 type="text"
                 name="jobType"
                 value={input.jobType}
@@ -159,8 +149,7 @@ const PostJob = () => {
             <div>
               <Label>Experience</Label>
               <Input
-                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                placeholder="experience"
+                placeholder="Experience (e.g. 2+ years)"
                 type="text"
                 name="experience"
                 value={input.experience}
@@ -168,10 +157,9 @@ const PostJob = () => {
               />
             </div>
             <div>
-              <Label>No. Of Position</Label>
+              <Label>Number of Positions</Label>
               <Input
-                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                placeholder="position"
+                placeholder="Position count"
                 type="number"
                 name="position"
                 value={input.position}
@@ -179,40 +167,42 @@ const PostJob = () => {
               />
             </div>
             {allCompanies.length > 0 && (
-              <Select onValueChange={selectChangeHandler}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select a company" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {allCompanies.map((company) => {
-                      return (
+              <div className="md:col-span-2">
+                <Label>Select Company</Label>
+                <Select onValueChange={selectChangeHandler}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select a company" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {allCompanies.map((company) => (
                         <SelectItem
                           value={company?.name?.toLowerCase()}
                           key={company._id}
                         >
                           {company.name}
                         </SelectItem>
-                      );
-                    })}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
             )}
           </div>
 
           {loading ? (
-            <Button className="w-full my-4">
+            <Button className="w-full mt-6" disabled>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Please wait
             </Button>
           ) : (
-            <Button type="submit" className="w-full my-4">
+            <Button type="submit" className="w-full mt-6">
               Post New Job
             </Button>
           )}
+
           {allCompanies.length === 0 && (
-            <p className="test-xs text-red-500  text-center my-3">
+            <p className="text-xs text-red-500 text-center mt-4">
               *Please register a company first to post a job
             </p>
           )}
