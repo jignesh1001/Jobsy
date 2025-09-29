@@ -3,10 +3,14 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
+
+//routes
 import userRoute from "./routes/user.route.js"
 import companyRoute from "./routes/comapny.route.js"
 import jobRoute from "./routes/job.route.js"
 import applicationRoute from "./routes/application.route.js"
+
+//----------------------------------//
 import fs from "fs"
 import path from "path"
 import { fileURLToPath } from "url";
@@ -14,7 +18,6 @@ import { fileURLToPath } from "url";
 dotenv.config({})
 
 const app = express();
-
 
 
 //middleware

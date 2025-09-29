@@ -22,7 +22,7 @@ const AdminJobs = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 my-10">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-6">
           <Input
-            className="w-full sm:w-auto"
+            className="flex-1 min-w-[200px]"
             placeholder="Filter by name, role"
             type="text"
             value={input}
