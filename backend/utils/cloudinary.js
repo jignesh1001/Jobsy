@@ -9,4 +9,9 @@ cloudinary.config({
         api_secret: process.env.API_SECRET // Click 'View API Keys' above to copy your API secret
     });
 
+cloudinary.uploader.upload("https://res.cloudinary.com/demo/image/upload/sample.jpg")
+  .then(res => console.log("cloudinary connected...", res.secure_url))
+  .catch(err => console.error("Cloudinary upload error:", err));
+
+
 export default cloudinary

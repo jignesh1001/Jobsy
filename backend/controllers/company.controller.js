@@ -1,5 +1,5 @@
 import { Company } from "../models/company.model.js";
-import { logMessage } from "../index.js";
+import { logMessage } from "../utils/log.js"
 
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";

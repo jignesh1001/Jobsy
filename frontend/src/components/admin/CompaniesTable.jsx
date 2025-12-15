@@ -59,6 +59,7 @@ const CompaniesTable = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
+            
               {filterCompany.map((item, index) => (
                 <TableRow key={index}>
                   <TableCell>
@@ -100,6 +101,8 @@ const CompaniesTable = () => {
       </div>
     </div>
   );
+  
+
 };
 
 export default CompaniesTable;

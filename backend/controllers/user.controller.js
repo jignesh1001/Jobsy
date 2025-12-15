@@ -1,7 +1,7 @@
 import {User} from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { logMessage } from "../index.js";
+import { logMessage } from "../utils/log.js"
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 
@@ -125,7 +125,7 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
   try {
     return res.status(200).cookie("token", "", { maxAge: 0 }).json({
-      message: "Logged out successfully ",
+      message: "Logged out successfully",
       success: true
     });
   } catch (error) {

@@ -95,6 +95,7 @@ const AdminJobsTable = () => {
       </div>
     </div>
   );
+     
 };
 
 export default AdminJobsTable;

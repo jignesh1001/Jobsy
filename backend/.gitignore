@@ -3,3 +3,4 @@ node_modules
 app.log
 body.json
 logs
+test.txt
