@@ -27,8 +27,8 @@ const PostJob = () => {
     location: "",
     jobType: "",
     experience: "",
-    position: 0,
-    company: "",
+    position:"",
+    company:""
   });
 
   const [loading, setLoading] = useState(false);
@@ -50,6 +50,14 @@ const PostJob = () => {
     e.preventDefault();
     try {
       setLoading(true);
+
+      if (!input.companyId) {                       
+            toast.error("Please select a company");
+            setLoading(false);
+            return;
+        }
+
+      console.log(input)
       const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
         headers: {
           "Content-Type": "application/json",
