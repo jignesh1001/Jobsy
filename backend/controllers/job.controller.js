@@ -6,7 +6,7 @@ export const postJob = async (req,res) =>{
        console.log(req.body)
        const userId = req.id;
        if(!title || !description || !salary || !location || !jobType || !experience || !position || !companyId ){
-          return res.status.json({
+          return res.status(400).json({
              message : "Something is missing",
              success :false
           })
@@ -29,9 +29,10 @@ export const postJob = async (req,res) =>{
           job,
           success:true
        })
-    } catch(error){
-        console.log(error)
-    }
+    } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error", success: false });
+}
 }
 
 export const getAllJobs = async(req,res)=>{
