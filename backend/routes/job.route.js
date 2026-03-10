@@ -5,7 +5,9 @@ import { getAdminJobs, getAllJobs, getJobById, postJob, updateJob } from "../con
 const router = express.Router()
 
 router.route("/post").post(isAuthenticated,postJob);
-router.route("/get").get(isAuthenticated,getAllJobs);
+// no authentication is needed. when a user first lands on index page it needs to see all 
+// the joblistings without being authenticated 
+router.route("/get").get(getAllJobs); 
 router.route("/getadminjobs").get(isAuthenticated,getAdminJobs);
 router.route("/get/:id").get(isAuthenticated,getJobById);
 router.route("/update/:id").put(isAuthenticated,updateJob);

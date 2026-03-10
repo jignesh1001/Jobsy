@@ -14,7 +14,7 @@ import { setAllCompanies } from '@/redux/companySlice'
               dispatch(setAllCompanies(res.data.companies))
            }
            if(res.data.success){
-            //  console.log(res.data)
+             console.log(res.data)
            }
         }catch(error){
            console.log(error)
