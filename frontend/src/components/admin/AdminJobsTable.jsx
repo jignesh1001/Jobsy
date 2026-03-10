@@ -54,7 +54,7 @@ const AdminJobsTable = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filterJobs.map((item, index) => (
+              {(filterJobs || []).map((item, index) => (
                 <TableRow key={index}>
                   <TableCell>{item.company?.name}</TableCell>
                   <TableCell>{item.title}</TableCell>
@@ -71,7 +71,7 @@ const AdminJobsTable = () => {
                             navigate(`/admin/jobs/${item._id}/update`)
                           }
                         >
-                          
+
                           <span>Edit</span>
                         </div>
                         <hr />
@@ -81,7 +81,7 @@ const AdminJobsTable = () => {
                             navigate(`/admin/jobs/${item._id}/applicants`)
                           }
                         >
-                
+
                           <span>Applicants</span>
                         </div>
                       </PopoverContent>
@@ -95,7 +95,7 @@ const AdminJobsTable = () => {
       </div>
     </div>
   );
-     
+
 };
 
 export default AdminJobsTable;

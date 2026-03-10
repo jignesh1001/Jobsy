@@ -60,7 +60,7 @@ const CompaniesTable = () => {
             </TableHeader>
             <TableBody>
             
-              {filterCompany.map((item, index) => (
+              {(filterCompany || []).map((item, index) => (
                 <TableRow key={index}>
                   <TableCell>
                     <Avatar className="h-10 w-10">
