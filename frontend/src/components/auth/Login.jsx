@@ -22,7 +22,10 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, user } = useSelector((store) => store.auth);
-
+  
+  useEffect(() => {
+  dispatch(setLoading(false)); // reset on mount
+}, []);
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
