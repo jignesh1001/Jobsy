@@ -42,7 +42,8 @@ function AppliedJobTable() {
               <TableHead>Date</TableHead>
               <TableHead>Job</TableHead>
               <TableHead>Company</TableHead>
-              <TableHead className="text-right">Status</TableHead>
+              <TableHead className="text-center">Status</TableHead>
+              <TableHead className="text-right">Delete</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -57,7 +58,7 @@ function AppliedJobTable() {
                 <TableCell className="whitespace-nowrap text-sm">
                   {item.job?.company?.name}
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className="text-center">
                   <Badge
                     className={`text-white text-xs px-2 py-1 ${
                       item.status === "rejected"
@@ -69,6 +70,11 @@ function AppliedJobTable() {
                   >
                     {item.status.toUpperCase()}
                   </Badge>
+                </TableCell>
+                <TableCell className="whitespace-nowrap text-right">
+                    <Badge className={`text-white text-xs px-2 py-1`}>
+                       delete
+                    </Badge>
                 </TableCell>
               </TableRow>
             ))}

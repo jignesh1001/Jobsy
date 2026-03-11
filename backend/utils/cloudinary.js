@@ -10,7 +10,7 @@ cloudinary.config({
     });
 
 cloudinary.uploader.upload("https://res.cloudinary.com/demo/image/upload/sample.jpg")
-  .then(res => console.log("cloudinary connected...", res.secure_url))
+  .then(res => console.log("cloudinary connected..."))
   .catch(err => console.error("Cloudinary upload error:", err));
 
 

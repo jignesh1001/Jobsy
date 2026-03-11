@@ -60,7 +60,6 @@ app.get("/",(req,res)=>{
 
 app.listen(PORT,()=>{
     connectDB();
-    console.log('testing.........')
     console.log(`Server running at port ${PORT}`)
     
 })
