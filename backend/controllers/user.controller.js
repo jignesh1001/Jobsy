@@ -138,8 +138,14 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, bio, skills } = req.body;
-    // console.log(fullname, email, phoneNumber, bio, skills)
     const file = req.file;
+
+    if (!file) {
+      return res.status(400).json({
+        message: "No file uploaded",
+        success: false,
+      });
+    }
 
     // cloudinary setup
     const fileUri = getDataUri(file)
