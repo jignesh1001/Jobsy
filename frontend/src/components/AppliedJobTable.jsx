@@ -22,7 +22,7 @@ function AppliedJobTable() {
     );
   }
 
-  if (applications.length === 0) {
+  if (!applications || applications.length === 0) {
     return (
       <h1 className="text-center py-4 text-gray-500">
         No applications found.

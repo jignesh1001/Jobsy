@@ -59,7 +59,7 @@ function Profile() {
           <div className="my-5">
             <h1 className="font-semibold mb-2">Skills</h1>
             <div className="flex flex-wrap items-center gap-2">
-              {user?.profile?.skills.length > 0 ? (
+              {user?.profile?.skills && user?.profile?.skills.length > 0 ? (
                 user?.profile?.skills.map((item, index) => (
                   <Badge key={index}>{item}</Badge>
                 ))
@@ -92,7 +92,7 @@ function Profile() {
         {/* Applied Jobs */}
         <div className="bg-white rounded-2xl mt-6 p-6 sm:p-8">
           <h1 className="font-bold text-lg mb-5">
-            Applied Jobs ({applications.length})
+            Applied Jobs ({applications?.length || 0})
           </h1>
           <AppliedJobTable />
         </div>

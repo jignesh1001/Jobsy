@@ -1,4 +1,5 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
@@ -6,10 +7,12 @@ import axios from "axios";
 import { JOB_API_END_POINT, APPLICATION_API_END_POINT } from "@/utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { setSingleJob } from "@/redux/jobSlice";
+import { setApplications } from "@/redux/applicationsSlice";
 import { toast } from "sonner";
 
 function Jobdescription() {
   const { id: jobId } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { singleJob } = useSelector((store) => store.job);
@@ -29,6 +32,13 @@ function Jobdescription() {
           applications: [...singleJob.applications, { applicant: user?._id }],
         };
         dispatch(setSingleJob(updatedSingleJob));
+
+        // Update applications slice to reflect new application in profile
+        const newApplication = res.data.application;
+        if (newApplication) {
+          dispatch(setApplications((prev) => [...(prev || []), newApplication]));
+        }
+
         toast.success(res.data.message);
       }
     } catch (error) {
@@ -60,6 +70,16 @@ function Jobdescription() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 my-10">
+      {/* Back Button */}
+      <Button
+        variant="outline"
+        onClick={() => navigate(-1)}
+        className="mb-4 gap-2"
+      >
+        <ArrowLeft size={16} />
+        Back
+      </Button>
+
       {/* Top Section */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
